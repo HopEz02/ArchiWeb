@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Archivo, Archivo_Mono } from "next/font/google";
+import { Fraunces, Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
@@ -18,7 +18,12 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const archivoMono = Archivo_Mono({
+// "Archivo Mono" is not a real Google Fonts family (only Archivo,
+// Archivo Narrow, and Archivo Black exist) — that caused the
+// "Unknown font" error. IBM Plex Mono is a real font with a similar
+// technical/blueprint character, used here for the small project
+// metadata captions (area / location / year).
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-mono",
@@ -40,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${archivo.variable} ${archivoMono.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${archivo.variable} ${plexMono.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
