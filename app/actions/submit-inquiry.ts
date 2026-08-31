@@ -10,8 +10,6 @@ export type SubmitInquiryState =
   | { status: "success" }
   | { status: "error"; message: string; fieldErrors?: Record<string, string> };
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function submitInquiry(
   _prevState: SubmitInquiryState,
   formData: FormData
@@ -65,6 +63,27 @@ export async function submitInquiry(
   }
 
   const { name, email, phone, projectType, message } = parsed.data;
+
+  // ⚠️ DEV-ONLY FALLBACK — remove before launch.
+  // If RESEND_API_KEY isn't configured yet, don't attempt to send (the
+  // Resend SDK throws synchronously if the key is missing). Instead, log
+  // the inquiry to the server console so local development isn't blocked.
+  // In this state, real inquiries are NOT delivered anywhere — only
+  // visible in your terminal/server logs. Set RESEND_API_KEY in
+  // .env.local (and in Vercel's env vars for production) to send real
+  // emails; once that's done, this branch simply never triggers.
+  if (!process.env.RESEND_API_KEY) {
+    console.warn(
+      "[contact-form] RESEND_API_KEY is not set — inquiry was NOT emailed, logging instead:",
+      { name, email, phone, projectType, message }
+    );
+    return { status: "success" };
+  }
+
+  // Instantiated here (not at module scope) so a missing/invalid key is a
+  // normal, recoverable per-request error path instead of crashing every
+  // request that touches this module.
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     await resend.emails.send({
