@@ -19,6 +19,8 @@ const config: Config = {
         success: "var(--color-success-600)",
         warning: "var(--color-warning-600)",
         error: "var(--color-error-600)",
+        successLight: "var(--color-success-100)",
+        errorLight: "var(--color-error-100)",
       },
       fontFamily: {
         display: ["var(--font-display)"],
