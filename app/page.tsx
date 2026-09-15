@@ -39,7 +39,11 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="px-lg py-4xl sm:px-2xl md:px-4xl md:py-5xl"
       >
-        <div className="grid grid-cols-1 gap-3xl lg:grid-cols-[1.4fr_1fr] lg:items-center">
+        {/* Capped at max-w-content (1200px) and centered so the hero row
+            reads as one composed unit even on very wide screens, instead
+            of the text and the architect card drifting apart with a dead
+            gap between them. */}
+        <div className="mx-auto max-w-content grid grid-cols-1 gap-3xl lg:grid-cols-2 lg:items-center lg:gap-4xl">
           <div>
             <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
               Spații definite de lumină, proporție și scop.
