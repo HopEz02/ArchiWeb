@@ -39,10 +39,10 @@ export default function HomePage() {
         className="px-lg py-4xl sm:px-2xl md:px-4xl md:py-5xl"
       >
         <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
-          TODO: one confident sentence about the studio&apos;s approach.
+          Spații definite de lumină, proporție și scop.
         </h1>
         <p className="mt-lg max-w-prose text-[18px] text-charcoal">
-          TODO: one supporting line — what kind of work, for whom.
+          Servicii complete de arhitectură — de la concept la execuție.
         </p>
         <div className="mt-xl flex flex-wrap gap-lg">
           <Button href="/contact#booking" variant="primary">
