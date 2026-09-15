@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/Button";
+import { ArchitectProfile } from "@/components/ArchitectProfile";
 
 // TODO(content): every field below marked TODO is placeholder and must be
 // replaced with real photography, copy, and project data before launch.
@@ -53,6 +54,8 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
+
+      <ArchitectProfile />
 
       <section
         aria-labelledby="work-heading"
