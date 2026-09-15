@@ -1,12 +1,19 @@
+import Link from "next/link";
 import { Button } from "@/components/Button";
 
 // TODO(content): every field below marked TODO is placeholder and must be
 // replaced with real photography, copy, and project data before launch.
 // Nothing here should ship as-is.
+//
+// Images use Lorem Picsum (a placeholder-image service backed by Unsplash
+// photos, licensed specifically for prototyping) — not copyrighted photos
+// scraped from a search engine — purely so this section can be previewed
+// with real photographic weight before actual project photography exists.
 const FEATURED_PROJECTS = [
-  { name: "TODO: Project name", meta: "TODO: m² — location — year" },
-  { name: "TODO: Project name", meta: "TODO: m² — location — year" },
-  { name: "TODO: Project name", meta: "TODO: m² — location — year" },
+  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-1" },
+  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-2" },
+  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-3" },
+  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-4" },
 ];
 
 const SERVICES = [
@@ -57,17 +64,19 @@ export default function HomePage() {
 
         <div className="mt-2xl grid grid-cols-1 gap-3xl md:grid-cols-2">
           {FEATURED_PROJECTS.map((project, index) => (
-            <figure key={index}>
-              {/* TODO(content): replace with a real, optimized photograph
-                  (next/image) and descriptive alt text once photography
-                  is available. This placeholder is intentionally visible
-                  as a placeholder, not silently blank. */}
-              <div
-                role="img"
-                aria-label="Placeholder — project photograph not yet added"
-                className="flex aspect-[4/3] items-center justify-center border border-charcoal/20 bg-charcoal/5 text-[14px] text-charcoal/60"
-              >
-                Image placeholder
+            <figure key={index} className="group">
+              {/* TODO: swap for next/image with a real optimized file once
+                  photography exists — plain <img> is fine for this
+                  temporary, dynamically-seeded preview only. */}
+              <div className="overflow-hidden">
+                <img
+                  src={`https://picsum.photos/seed/${project.imageSeed}/800/600`}
+                  alt={`TODO: real, descriptive alt text for ${project.name} — what the space actually looks like`}
+                  width={800}
+                  height={600}
+                  loading={index < 2 ? "eager" : "lazy"}
+                  className="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:transform-none"
+                />
               </div>
               <figcaption className="mt-sm">
                 <span className="block text-[16px] text-navy">
@@ -97,17 +106,30 @@ export default function HomePage() {
         <h2 id="services-heading" className="text-[32px]">
           What we do
         </h2>
-        <div className="mt-2xl grid grid-cols-1 gap-2xl md:grid-cols-3">
-          {SERVICES.map((service) => (
-            <article key={service.title}>
-              <h3 className="text-[24px]">{service.title}</h3>
+        {/* Thin gold rule — the same signature detail used elsewhere,
+            not a new color. */}
+        <div className="mt-lg h-px w-16 bg-gold" aria-hidden="true" />
+
+        <div className="mt-2xl grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-charcoal/15">
+          {SERVICES.map((service, index) => (
+            <Link
+              key={service.title}
+              href="/services"
+              className="group block border-t border-charcoal/15 pt-lg transition-colors duration-200 hover:border-t-gold focus-visible:border-t-gold md:px-2xl md:first:pl-0 md:last:pr-0"
+            >
+              <span className="block font-mono text-[13px] text-charcoal/50">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-sm text-[24px] transition-colors duration-200 group-hover:text-gold">
+                {service.title}
+              </h3>
               <p className="mt-sm text-charcoal">{service.blurb}</p>
-            </article>
+              <span className="mt-lg inline-block text-[14px] text-navy transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:transform-none">
+                Learn more →
+              </span>
+            </Link>
           ))}
         </div>
-        <Button href="/services" variant="secondary" className="mt-2xl">
-          Explore services
-        </Button>
       </section>
 
       {/* TODO(content): credentials/proof section intentionally omitted —
