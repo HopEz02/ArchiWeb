@@ -39,23 +39,27 @@ export default function HomePage() {
         aria-labelledby="hero-heading"
         className="px-lg py-4xl sm:px-2xl md:px-4xl md:py-5xl"
       >
-        <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
-          Spații definite de lumină, proporție și scop.
-        </h1>
-        <p className="mt-lg max-w-prose text-[18px] text-charcoal">
-          Servicii complete de arhitectură — de la concept la execuție.
-        </p>
-        <div className="mt-xl flex flex-wrap gap-lg">
-          <Button href="/contact#booking" variant="primary">
-            Book a consultation
-          </Button>
-          <Button href="/portfolio" variant="secondary">
-            View portfolio
-          </Button>
+        <div className="grid grid-cols-1 gap-3xl lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div>
+            <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
+              Spații definite de lumină, proporție și scop.
+            </h1>
+            <p className="mt-lg max-w-prose text-[18px] text-charcoal">
+              Servicii complete de arhitectură — de la concept la execuție.
+            </p>
+            <div className="mt-xl flex flex-wrap gap-lg">
+              <Button href="/contact#booking" variant="primary">
+                Book a consultation
+              </Button>
+              <Button href="/portfolio" variant="secondary">
+                View portfolio
+              </Button>
+            </div>
+          </div>
+
+          <ArchitectProfile />
         </div>
       </section>
-
-      <ArchitectProfile />
 
       <section
         aria-labelledby="work-heading"
