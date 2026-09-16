@@ -7,14 +7,14 @@ import { ArchitectProfile } from "@/components/ArchitectProfile";
 // Nothing here should ship as-is.
 //
 // Images use Lorem Picsum (a placeholder-image service backed by Unsplash
-// photos, licensed specifically for prototyping) — not copyrighted photos
-// scraped from a search engine — purely so this section can be previewed
+// photos, licensed specifically for prototyping), not copyrighted photos
+// scraped from a search engine, purely so this section can be previewed
 // with real photographic weight before actual project photography exists.
 const FEATURED_PROJECTS = [
-  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-1" },
-  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-2" },
-  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-3" },
-  { name: "TODO: Project name", meta: "TODO: m² — location — year", imageSeed: "archiverse-home-4" },
+  { name: "TODO: Project name", meta: "TODO: m² · location · year", imageSeed: "archiverse-home-1" },
+  { name: "TODO: Project name", meta: "TODO: m² · location · year", imageSeed: "archiverse-home-2" },
+  { name: "TODO: Project name", meta: "TODO: m² · location · year", imageSeed: "archiverse-home-3" },
+  { name: "TODO: Project name", meta: "TODO: m² · location · year", imageSeed: "archiverse-home-4" },
 ];
 
 const SERVICES = [
@@ -49,7 +49,7 @@ export default function HomePage() {
               Spații definite de lumină, proporție și scop.
             </h1>
             <p className="mt-lg max-w-prose text-[18px] text-charcoal">
-              Servicii complete de arhitectură — de la concept la execuție.
+              Servicii complete de arhitectură: de la concept la execuție.
             </p>
             <div className="mt-xl flex flex-wrap gap-lg">
               <Button href="/contact#booking" variant="primary">
@@ -75,18 +75,21 @@ export default function HomePage() {
 
         <div className="mt-2xl grid grid-cols-1 gap-3xl md:grid-cols-2">
           {FEATURED_PROJECTS.map((project, index) => (
-            <figure key={index} className="group">
+            <figure key={index}>
               {/* TODO: swap for next/image with a real optimized file once
-                  photography exists — plain <img> is fine for this
-                  temporary, dynamically-seeded preview only. */}
+                  photography exists, plain <img> is fine for this
+                  temporary, dynamically-seeded preview only.
+                  No hover motion here by design: a static, editorial
+                  gallery reads calmer and more premium than a zoom
+                  effect, and these thumbnails aren't linked yet anyway. */}
               <div className="overflow-hidden">
                 <img
                   src={`https://picsum.photos/seed/${project.imageSeed}/800/600`}
-                  alt={`TODO: real, descriptive alt text for ${project.name} — what the space actually looks like`}
+                  alt={`TODO: real, descriptive alt text for ${project.name}: what the space actually looks like`}
                   width={800}
                   height={600}
                   loading={index < 2 ? "eager" : "lazy"}
-                  className="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:transform-none"
+                  className="w-full object-cover"
                 />
               </div>
               <figcaption className="mt-sm">
@@ -117,33 +120,36 @@ export default function HomePage() {
         <h2 id="services-heading" className="text-[32px]">
           What we do
         </h2>
-        {/* Thin gold rule — the same signature detail used elsewhere,
+        {/* Thin gold rule, the same signature detail used elsewhere,
             not a new color. */}
         <div className="mt-lg h-px w-16 bg-gold" aria-hidden="true" />
 
-        <div className="mt-2xl grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-charcoal/15">
+        {/* Stacked, full-width editorial list rather than three columns
+            side by side, closer to a spec sheet or table of contents
+            than a template "3 feature cards" row. */}
+        <div className="mt-2xl border-t border-charcoal/15">
           {SERVICES.map((service, index) => (
             <Link
               key={service.title}
               href="/services"
-              className="group block border-t border-charcoal/15 pt-lg transition-colors duration-200 hover:border-t-gold focus-visible:border-t-gold md:px-2xl md:first:pl-0 md:last:pr-0"
+              className="group flex flex-col gap-sm border-b border-charcoal/15 py-xl transition-colors duration-200 hover:bg-charcoal/[0.03] focus-visible:bg-charcoal/[0.03] md:flex-row md:items-baseline md:gap-2xl"
             >
-              <span className="block font-mono text-[13px] text-charcoal/50">
+              <span className="font-mono text-[13px] text-charcoal/50 md:w-16 md:shrink-0">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-sm text-[24px] transition-colors duration-200 group-hover:text-gold">
+              <h3 className="text-[24px] text-navy transition-colors duration-200 group-hover:text-gold md:w-56 md:shrink-0">
                 {service.title}
               </h3>
-              <p className="mt-sm text-charcoal">{service.blurb}</p>
-              <span className="mt-lg inline-block text-[14px] text-navy transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:transform-none">
-                Learn more →
+              <p className="text-charcoal md:flex-1">{service.blurb}</p>
+              <span className="text-[14px] text-navy md:shrink-0">
+                Learn more
               </span>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* TODO(content): credentials/proof section intentionally omitted —
+      {/* TODO(content): credentials/proof section intentionally omitted,
           per the working agreement, I won't fabricate years-active,
           project counts, or client quotes. Flag me with the real content
           and I'll add this section. */}
