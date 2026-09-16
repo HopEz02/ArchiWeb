@@ -1,10 +1,10 @@
 // TODO(content): name, title, bio, and photo below are placeholders and
 // must be replaced with the real architect's information before launch.
 // The photo uses Lorem Picsum (see note in app/page.tsx) purely to preview
-// layout weight — swap for a real portrait once available.
+// layout weight, swap for a real portrait once available.
 const ARCHITECT = {
   name: "TODO: Full name",
-  title: "TODO: Title — e.g. Founding Architect",
+  title: "TODO: Title (e.g. Founding Architect)",
   bio: "TODO: two or three sentences on background, philosophy, and focus.",
   photoSeed: "archiverse-architect-portrait",
   instagramUrl: "https://instagram.com/TODO",
@@ -31,7 +31,7 @@ function InstagramIcon() {
 
 /**
  * Compact companion card meant to sit beside the hero copy (see
- * app/page.tsx), not as its own full-width section — keeps the top of
+ * app/page.tsx), not as its own full-width section. Keeps the top of
  * the homepage to a single visual row instead of two stacked blocks.
  */
 export function ArchitectProfile() {
@@ -41,12 +41,12 @@ export function ArchitectProfile() {
 
       <div className="flex items-center gap-lg">
         {/* TODO: swap for next/image with the real portrait file once
-            photography exists — plain <img> is fine for this temporary,
+            photography exists, plain <img> is fine for this temporary,
             dynamically-seeded preview only. */}
         <div className="h-[88px] w-[88px] shrink-0 overflow-hidden rounded-full">
           <img
             src={`https://picsum.photos/seed/${ARCHITECT.photoSeed}/240/240`}
-            alt={`TODO: real, descriptive alt text — portrait of ${ARCHITECT.name}`}
+            alt={`TODO: real, descriptive alt text: portrait of ${ARCHITECT.name}`}
             width={240}
             height={240}
             loading="lazy"
