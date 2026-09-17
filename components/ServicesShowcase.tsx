@@ -117,11 +117,13 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
         {/* Progress dots: a real, keyboard-and-screen-reader-usable
             control (not decorative), so it lives outside the
             aria-hidden image layer above. Clicking one scrolls straight
-            to that title. */}
+            to that title. Sized up and given a heavier, higher-contrast
+            border on the inactive state so they're readable at a glance
+            over photographic backgrounds. */}
         <div
           role="tablist"
           aria-label="Sari la un serviciu"
-          className="absolute right-lg top-1/2 z-20 flex -translate-y-1/2 flex-col gap-md sm:right-2xl md:right-4xl"
+          className="absolute right-lg top-1/2 z-20 flex -translate-y-1/2 flex-col gap-lg sm:right-2xl md:right-4xl"
         >
           {services.map((service, index) => (
             <button
@@ -131,7 +133,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
               aria-selected={index === activeIndex}
               aria-label={service.title}
               onClick={() => scrollToRow(index)}
-              className={`h-[10px] w-[10px] rounded-full border border-cream/60 transition-colors motion-safe:duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${
+              className={`h-[20px] w-[20px] rounded-full border-2 border-cream transition-colors motion-safe:duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${
                 index === activeIndex ? "border-gold bg-gold" : "bg-transparent"
               }`}
             />
