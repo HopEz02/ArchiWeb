@@ -26,6 +26,15 @@ type ServicesShowcaseProps = {
 // screen readers, and it respects prefers-reduced-motion via the
 // motion-safe: variants below (Tailwind's built-in reduced-motion variant,
 // no extra dependency).
+//
+// ROW_HEIGHT_VH controls how much scroll it takes to move from one title
+// to the next. It's intentionally much shorter than a full viewport
+// (100vh) — a few small scroll "bumps" per title, not a full screen's
+// worth of scrolling each time — while still leaving the section taller
+// than the viewport so the sticky background has room to stay pinned on
+// every screen size.
+const ROW_HEIGHT_VH = 40;
+
 export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -57,7 +66,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   return (
     <div
       className="relative"
-      style={{ height: `${services.length * 100}vh` }}
+      style={{ height: `${services.length * ROW_HEIGHT_VH}vh` }}
     >
       {/* Pinned background layer. Purely decorative — the title text
           already conveys the information — so it's hidden from
@@ -71,7 +80,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
             key={service.title}
             src={service.image}
             alt=""
-            className={`absolute inset-0 h-full w-full object-cover motion-safe:transition-opacity motion-safe:duration-700 ${
+            className={`absolute inset-0 h-full w-full object-cover motion-safe:transition-opacity motion-safe:duration-500 ${
               index === activeIndex ? "opacity-100" : "opacity-0"
             }`}
           />
@@ -90,7 +99,8 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
               rowRefs.current[index] = el;
             }}
             data-index={index}
-            className="flex h-screen items-center px-lg sm:px-2xl md:px-4xl"
+            className="flex items-center px-lg sm:px-2xl md:px-4xl"
+            style={{ height: `${ROW_HEIGHT_VH}vh` }}
           >
             <Link
               href="/services"
@@ -103,7 +113,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3
-                  className={`text-[40px] transition-colors motion-safe:duration-500 md:text-[64px] ${
+                  className={`text-[40px] transition-colors motion-safe:duration-300 md:text-[64px] ${
                     index === activeIndex ? "text-gold" : "text-cream/60"
                   }`}
                 >
@@ -111,7 +121,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
                 </h3>
               </div>
               <p
-                className={`max-w-prose pl-[52px] text-cream transition-opacity motion-safe:duration-500 md:pl-[76px] ${
+                className={`max-w-prose pl-[52px] text-cream transition-opacity motion-safe:duration-300 md:pl-[76px] ${
                   index === activeIndex ? "opacity-100" : "opacity-0"
                 }`}
               >
