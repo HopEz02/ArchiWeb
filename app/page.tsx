@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Button } from "@/components/Button";
 import { ArchitectProfile } from "@/components/ArchitectProfile";
+import { ServicesShowcase, type Service } from "@/components/ServicesShowcase";
 
 // TODO(content): every field below marked TODO is placeholder and must be
 // replaced with real photography, copy, and project data before launch.
@@ -17,18 +17,31 @@ const FEATURED_PROJECTS = [
   { name: "TODO: Project name", meta: "TODO: m² · location · year", imageSeed: "archiverse-home-4" },
 ];
 
-const SERVICES = [
+// Background photography for the interactive "What we do" showcase below
+// is sourced directly from Unsplash under the Unsplash License (free for
+// commercial use, no attribution required) — not scraped from a generic
+// search engine, and topically representative of each service rather than
+// random. Swap these for ArchiVerse's own project photography before
+// launch. Credits: Daniel McCullough, Jacek Dylag, Dylan Gillis
+// (unsplash.com).
+const SERVICES: Service[] = [
   {
     title: "Design",
     blurb: "TODO: one sentence describing the design offering.",
+    image:
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop",
   },
   {
     title: "Build",
     blurb: "TODO: one sentence describing the build offering.",
+    image:
+      "https://images.unsplash.com/photo-1527335988388-b40ee248d80c?q=80&w=1920&auto=format&fit=crop",
   },
   {
     title: "Consulting",
     blurb: "TODO: one sentence describing the consulting offering.",
+    image:
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1920&auto=format&fit=crop",
   },
 ];
 
@@ -113,40 +126,17 @@ export default function HomePage() {
         </Button>
       </section>
 
-      <section
-        aria-labelledby="services-heading"
-        className="px-lg py-4xl sm:px-2xl md:px-4xl"
-      >
-        <h2 id="services-heading" className="text-[32px]">
-          What we do
-        </h2>
-        {/* Thin gold rule, the same signature detail used elsewhere,
-            not a new color. */}
-        <div className="mt-lg h-px w-16 bg-gold" aria-hidden="true" />
-
-        {/* Stacked, full-width editorial list rather than three columns
-            side by side, closer to a spec sheet or table of contents
-            than a template "3 feature cards" row. */}
-        <div className="mt-2xl border-t border-charcoal/15">
-          {SERVICES.map((service, index) => (
-            <Link
-              key={service.title}
-              href="/services"
-              className="group flex flex-col gap-sm border-b border-charcoal/15 py-xl transition-colors duration-200 hover:bg-charcoal/[0.03] focus-visible:bg-charcoal/[0.03] md:flex-row md:items-baseline md:gap-2xl"
-            >
-              <span className="font-mono text-[13px] text-charcoal/50 md:w-16 md:shrink-0">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-[24px] text-navy transition-colors duration-200 group-hover:text-gold md:w-56 md:shrink-0">
-                {service.title}
-              </h3>
-              <p className="text-charcoal md:flex-1">{service.blurb}</p>
-              <span className="text-[14px] text-navy md:shrink-0">
-                Learn more
-              </span>
-            </Link>
-          ))}
+      <section aria-labelledby="services-heading">
+        <div className="px-lg py-4xl sm:px-2xl md:px-4xl">
+          <h2 id="services-heading" className="text-[32px]">
+            What we do
+          </h2>
+          {/* Thin gold rule, the same signature detail used elsewhere,
+              not a new color. */}
+          <div className="mt-lg h-px w-16 bg-gold" aria-hidden="true" />
         </div>
+
+        <ServicesShowcase services={SERVICES} />
       </section>
 
       {/* TODO(content): credentials/proof section intentionally omitted,
