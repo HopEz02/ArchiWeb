@@ -13,34 +13,32 @@ type ServicesShowcaseProps = {
   services: Service[];
 };
 
-// Scroll-driven showcase: a background image stays pinned in the viewport
-// (position: sticky) while the list of titles scrolls past it at the
-// normal document rate. On every scroll frame we measure which title row
-// is geometrically closest to the vertical center of the screen and mark
-// that one "active" — highlighted, full opacity, paired with its own
-// background photo. Because this is a direct position measurement (not an
-// event that can be skipped between frames on a fast scroll/flick), it
-// can't miss the middle item the way a narrow IntersectionObserver band
-// could — and it naturally switches right at the midpoint between two
-// adjacent titles, which is exactly where you'd expect the handoff to
-// happen.
+// ROW_HEIGHT_VH is how much scroll it takes to move from one title to the
+// next (kept short and snappy per an earlier round of feedback).
 //
-// This gives the same visual read as true scroll-jacking (the Kin-style
-// reference) without actually hijacking scroll: the page still scrolls
-// natively, so it stays usable with a trackpad, touch, keyboard (Tab), and
-// screen readers, and it respects prefers-reduced-motion via the
-// motion-safe: variants below (Tailwind's built-in reduced-motion variant,
-// no extra dependency).
+// The section's total height is deliberately NOT just
+// services.length * ROW_HEIGHT_VH. It's built as:
+//   100vh                              (one full screen, so the pinned
+//                                        background has room to hold)
+//   + (services.length - 1) * ROW_HEIGHT_VH   (one "step" of scroll
+//                                        between each pair of consecutive
+//                                        titles)
+// with matching padding of (100vh - ROW_HEIGHT_VH) / 2 above the first
+// title, so the FIRST title starts out already centered on screen (not
+// half cut off at the top) and the LAST title finishes centered exactly
+// when the pinned range runs out.
 //
-// ROW_HEIGHT_VH controls how much scroll it takes to move from one title
-// to the next — intentionally much shorter than a full viewport (100vh),
-// while still leaving the section taller than the viewport so the sticky
-// background has room to stay pinned on every screen size.
+// Without this, the sticky background used to let go early — while you
+// were still on the first or last title — and the whole page would start
+// scrolling underneath it instead of just the three titles moving.
 const ROW_HEIGHT_VH = 40;
 
 export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const paddingVh = (100 - ROW_HEIGHT_VH) / 2;
+  const wrapperHeightVh = 100 + (services.length - 1) * ROW_HEIGHT_VH;
 
   useEffect(() => {
     let frame: number | null = null;
@@ -97,10 +95,7 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   };
 
   return (
-    <div
-      className="relative"
-      style={{ height: `${services.length * ROW_HEIGHT_VH}vh` }}
-    >
+    <div className="relative" style={{ height: `${wrapperHeightVh}vh` }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Background photos + overlay. Purely decorative — the title
             text already conveys the information — so this layer is
@@ -146,8 +141,10 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
 
       {/* Title list, absolutely positioned over the full scroll range so
           it moves with the page while the pinned background behind it
-          stays put. */}
+          stays put. The leading spacer centers the first title on
+          mount instead of starting it half off-screen. */}
       <div className="absolute inset-0 flex flex-col">
+        <div style={{ height: `${paddingVh}vh` }} aria-hidden="true" />
         {services.map((service, index) => (
           <div
             key={service.title}
