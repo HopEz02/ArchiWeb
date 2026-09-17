@@ -31,7 +31,7 @@ type ServicesShowcaseProps = {
 // Without this, the sticky background used to let go early — while you
 // were still on the first or last title — and the whole page would start
 // scrolling underneath it instead of just the three titles moving.
-const ROW_HEIGHT_VH = 40;
+const ROW_HEIGHT_VH = 60;
 
 export function ServicesShowcase({ services }: ServicesShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
