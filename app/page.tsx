@@ -45,18 +45,48 @@ const SERVICES: Service[] = [
   },
 ];
 
+// Same Unsplash-licensed interior photo used for the "Design" showcase
+// above, reused here purely as a placeholder for the hero's decorative
+// fading photo (layout weight only). Swap for real project photography
+// before launch — see FEATURED_PROJECTS note above re: licensing.
+const HERO_FADE_IMAGE =
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop";
+
 export default function HomePage() {
   return (
     <>
       <section
         aria-labelledby="hero-heading"
-        className="px-lg py-4xl sm:px-2xl md:px-4xl md:py-5xl"
+        className="relative isolate overflow-hidden px-lg py-4xl sm:px-2xl md:px-4xl md:py-5xl"
       >
+        {/* Decorative fading photograph anchored to the right edge of the
+            hero. Purely atmospheric — carries no information — so it's
+            aria-hidden and non-interactive, and hidden below lg so it
+            never competes with the heading/buttons on small screens. The
+            CSS mask fades it to fully transparent well before it reaches
+            the architect card's text, so text contrast isn't affected. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[32%] lg:block"
+          style={{
+            maskImage: "linear-gradient(to left, black 15%, transparent 75%)",
+            WebkitMaskImage:
+              "linear-gradient(to left, black 15%, transparent 75%)",
+          }}
+        >
+          <img
+            src={HERO_FADE_IMAGE}
+            alt=""
+            className="h-full w-full object-cover opacity-40"
+          />
+        </div>
+
         {/* Capped at max-w-content (1200px) and centered so the hero row
             reads as one composed unit even on very wide screens, instead
             of the text and the architect card drifting apart with a dead
-            gap between them. */}
-        <div className="mx-auto max-w-content grid grid-cols-1 gap-3xl lg:grid-cols-2 lg:items-center lg:gap-4xl">
+            gap between them. relative z-10 keeps it above the fading
+            photo layer. */}
+        <div className="relative z-10 mx-auto max-w-content grid grid-cols-1 gap-3xl lg:grid-cols-2 lg:items-center lg:gap-4xl">
           <div>
             <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
               Spații definite de lumină, proporție și scop.
@@ -64,11 +94,14 @@ export default function HomePage() {
             <p className="mt-lg max-w-prose text-[18px] text-charcoal">
               Servicii complete de arhitectură: de la concept la execuție.
             </p>
-            <div className="mt-xl flex flex-wrap gap-lg">
-              <Button href="/contact#booking" variant="primary">
+            {/* The two Buttons sit directly against each other (no gap)
+                with radius only on their outer edge, so they read as one
+                combined block rather than two separate buttons. */}
+            <div className="mt-xl inline-flex flex-wrap">
+              <Button href="/contact#booking" variant="primary" radius="left">
                 Book a consultation
               </Button>
-              <Button href="/portfolio" variant="secondary">
+              <Button href="/portfolio" variant="secondary" radius="right">
                 View portfolio
               </Button>
             </div>
