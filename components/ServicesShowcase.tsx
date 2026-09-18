@@ -117,9 +117,12 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
         {/* Progress dots: a real, keyboard-and-screen-reader-usable
             control (not decorative), so it lives outside the
             aria-hidden image layer above. Clicking one scrolls straight
-            to that title. Sized up and given a heavier, higher-contrast
-            border on the inactive state so they're readable at a glance
-            over photographic backgrounds. */}
+            to that title.
+            The BUTTON is the tap/click target and is kept at a fixed
+            24x24px hit area (meets WCAG 2.2 2.5.8 minimum target size)
+            regardless of state. The visual dot is a smaller inner <span>
+            so it can shrink for the unselected state without shrinking
+            the actual clickable area. */}
         <div
           role="tablist"
           aria-label="Sari la un serviciu"
@@ -133,10 +136,17 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
               aria-selected={index === activeIndex}
               aria-label={service.title}
               onClick={() => scrollToRow(index)}
-              className={`h-[20px] w-[20px] rounded-full border-2 border-cream transition-colors motion-safe:duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${
-                index === activeIndex ? "border-gold bg-gold" : "bg-transparent"
-              }`}
-            />
+              className="flex h-[24px] w-[24px] items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            >
+              <span
+                aria-hidden="true"
+                className={`rounded-full border-2 transition-all motion-safe:duration-300 ${
+                  index === activeIndex
+                    ? "h-[14px] w-[14px] border-gold bg-gold"
+                    : "h-[8px] w-[8px] border-cream/70 bg-transparent"
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>
