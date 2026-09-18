@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 
 // TODO(legal): solid template, not legal advice — have it reviewed before
-// launch. Section 2 is written to match reality (no analytics tool is
-// approved/implemented yet, per the project's working agreement — no
-// tracking dependency gets added without an explicit ask-and-approve
-// step first). If Google Analytics (or similar) is approved later, a
-// cookie-consent banner requesting prior opt-in MUST ship in the same
-// change — non-essential cookies legally require consent before they're
-// set, not just a policy page saying they exist.
+// launch.
 export const metadata: Metadata = {
   title: "Politica de cookie-uri",
   description:
@@ -41,18 +35,24 @@ export default function CookiePolicyPage() {
               2. Ce cookie-uri folosim
             </h2>
             <p className="mt-sm">
-              La momentul actual, acest site nu utilizează cookie-uri de
-              analiză (statistici) sau de marketing. Site-ul poate seta
-              exclusiv cookie-uri strict necesare funcționării tehnice de
-              bază (de exemplu, pentru securitate).
+              <strong>Cookie-uri strict necesare.</strong> Site-ul poate seta
+              cookie-uri esențiale funcționării tehnice de bază (de exemplu,
+              pentru securitate). Acestea nu necesită consimțământ separat.
             </p>
             <p className="mt-sm">
-              [TODO: dacă se implementează ulterior un instrument de
-              analiză de trafic precum Google Analytics, această secțiune
-              trebuie actualizată, iar pe site trebuie afișat un banner de
-              consimțământ cookie care să solicite acordul dumneavoastră
-              explicit ÎNAINTE de plasarea oricărui cookie de analiză,
-              conform Legii nr. 506/2004.]
+              <strong>Cookie-uri de analiză (Google Analytics).</strong> La
+              prima vizită, vi se afișează un banner prin care vă solicităm
+              acordul înainte de a activa Google Analytics. Dacă alegeți
+              „Accept”, Google Analytics poate seta cookie-uri precum{" "}
+              <code>_ga</code> și <code>_ga_&lt;ID container&gt;</code>{" "}
+              pentru a distinge vizitatorii și sesiunile, cu o durată de
+              păstrare de până la 2 ani (setare implicită Google). Dacă
+              alegeți „Refuz”, aceste cookie-uri nu sunt setate, iar traficul
+              dumneavoastră nu este trimis către Google Analytics.
+            </p>
+            <p className="mt-sm">
+              Alegerea dumneavoastră este reținută local, în browser, și nu
+              este trimisă către noi sau către terți.
             </p>
           </section>
 
@@ -71,10 +71,13 @@ export default function CookiePolicyPage() {
 
           <section>
             <h2 className="text-[22px] md:text-[24px]">
-              4. Cum puteți dezactiva cookie-urile
+              4. Cum vă puteți schimba alegerea
             </h2>
             <p className="mt-sm">
-              Puteți gestiona sau dezactiva cookie-urile direct din setările
+              Puteți retrage sau modifica oricând consimțământul, folosind
+              linkul „Setări cookie-uri” din subsolul (footer-ul) site-ului
+              — acesta redeschide bannerul de consimțământ. Suplimentar,
+              puteți gestiona sau bloca cookie-urile direct din setările
               browserului dumneavoastră (Chrome, Firefox, Safari, Edge
               etc.), de obicei din secțiunea „Confidențialitate” sau
               „Cookie-uri” a browserului. Dezactivarea cookie-urilor poate
