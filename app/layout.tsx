@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -19,7 +20,7 @@ const archivo = Archivo({
 });
 
 // "Archivo Mono" is not a real Google Fonts family (only Archivo,
-// Archivo Narrow, and Archivo Black exist) — that caused the
+// Archivo Narrow, and Archivo Black exist) - that caused the
 // "Unknown font" error. IBM Plex Mono is a real font with a similar
 // technical/blueprint character, used here for the small project
 // metadata captions (area / location / year).
@@ -53,6 +54,7 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
