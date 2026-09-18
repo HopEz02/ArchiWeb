@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 
 // "About" points at /studio, matching the label Header.tsx already uses
 // for the same destination. That page doesn't exist yet (pre-existing
-// gap, not introduced here) — create app/studio/page.tsx with real
+// gap, not introduced here) - create app/studio/page.tsx with real
 // content when it's ready; until then this link 404s.
 const FOOTER_LINKS = [
   { href: "/studio", label: "About" },
@@ -30,13 +31,14 @@ export function Footer() {
       <div className="mt-xl flex flex-col gap-xs text-[13px] text-cream/60">
         <p>© {new Date().getFullYear()} ArchiVerse.</p>
         {/* TODO(content): mandatory legal transparency data for a
-            Romanian business website (Legea 26/1990, OUG nr. 99/2000) —
+            Romanian business website (Legea 26/1990, OUG nr. 99/2000) -
             replace every bracketed placeholder with the firm's real
             registration details before launch. */}
         <p>
           [Nume_Firma_SRL/BIA] · CUI: [Cod_Fiscal] · Reg. Com:{" "}
           [Numar_Inregistrare]
         </p>
+        <CookieSettingsButton />
       </div>
     </footer>
   );
