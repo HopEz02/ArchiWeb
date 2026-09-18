@@ -8,8 +8,17 @@ import {
   type CookieConsent,
 } from "@/lib/cookieConsent";
 
+// Public by design (NEXT_PUBLIC_*): a GA4 Measurement ID is meant to be
+// visible in the browser, it's not a secret. Until Denis sets it, this
+// whole component is a no-op - no banner, no script, nothing - the same
+// graceful-fallback pattern already used for Resend/Cal.com.
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+// Legea nr. 506/2004 (Romania's ePrivacy rules) and GDPR require opt-IN
+// consent before any non-essential cookie is set, so the GA script tag
+// below only renders after the visitor explicitly clicks "Accept", never
+// on page load. A banner that merely informs visitors analytics is
+// happening is not sufficient on its own.
 export function Analytics() {
   const [consent, setConsent] = useState<CookieConsent | null>(null);
   const [hydrated, setHydrated] = useState(false);
@@ -56,12 +65,12 @@ export function Analytics() {
       {hydrated && consent === null && (
         <div
           role="dialog"
-          aria-label="Consimtamant cookie-uri"
+          aria-label="Consimțământ cookie-uri"
           className="fixed inset-x-0 bottom-0 z-50 flex flex-col gap-lg border-t border-cream/20 bg-navy px-lg py-lg text-cream sm:flex-row sm:items-center sm:justify-between sm:px-2xl md:px-4xl"
         >
           <p className="max-w-prose text-[14px] text-cream/80">
-            Folosim cookie-uri de analiza pentru a intelege cum este folosit
-            site-ul. Le activam doar cu acordul dumneavoastra. Detalii in{" "}
+            Folosim cookie-uri de analiză pentru a înțelege cum este folosit
+            site-ul. Le activăm doar cu acordul dumneavoastră. Detalii în{" "}
             <a
               href="/politica-de-cookie"
               className="underline underline-offset-2 hover:text-cream"
