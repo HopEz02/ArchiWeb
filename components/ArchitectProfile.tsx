@@ -3,6 +3,7 @@
 // The photo uses Lorem Picsum (see note in app/page.tsx) purely to preview
 // layout weight, swap for a real portrait once available.
 const ARCHITECT = {
+  eyebrow: "TODO: Role label (e.g. Lead Architect)",
   name: "TODO: Full name",
   title: "TODO: Title (e.g. Founding Architect)",
   bio: "TODO: two or three sentences on background, philosophy, and focus.",
@@ -33,17 +34,22 @@ function InstagramIcon() {
  * Compact companion card meant to sit beside the hero copy (see
  * app/page.tsx), not as its own full-width section. Keeps the top of
  * the homepage to a single visual row instead of two stacked blocks.
+ *
+ * Sized deliberately small and tight (64px portrait, 18px name, uppercase
+ * "eyebrow" role label above the name) so this card reads as a compact
+ * credential card next to the hero headline, not a second competing
+ * headline of its own.
  */
 export function ArchitectProfile() {
   return (
-    <div className="flex flex-col gap-lg border-t border-charcoal/15 pt-xl lg:border-t-0 lg:border-l lg:border-charcoal/15 lg:pl-2xl lg:pt-0">
+    <div className="flex flex-col gap-md border-t border-charcoal/15 pt-xl lg:border-t-0 lg:border-l lg:border-charcoal/15 lg:pl-2xl lg:pt-0">
       <div className="h-px w-12 bg-gold" aria-hidden="true" />
 
-      <div className="flex items-center gap-lg">
+      <div className="flex items-center gap-md">
         {/* TODO: swap for next/image with the real portrait file once
             photography exists, plain <img> is fine for this temporary,
             dynamically-seeded preview only. */}
-        <div className="h-[88px] w-[88px] shrink-0 overflow-hidden rounded-full">
+        <div className="h-[64px] w-[64px] shrink-0 overflow-hidden rounded-full">
           <img
             src={`https://picsum.photos/seed/${ARCHITECT.photoSeed}/240/240`}
             alt={`TODO: real, descriptive alt text: portrait of ${ARCHITECT.name}`}
@@ -54,14 +60,19 @@ export function ArchitectProfile() {
           />
         </div>
         <div>
-          <h2 className="font-display text-[22px] text-navy">{ARCHITECT.name}</h2>
-          <p className="mt-xs font-mono text-[12px] uppercase tracking-wide text-charcoal/70">
+          <p className="font-mono text-[11px] uppercase tracking-wide text-gold">
+            {ARCHITECT.eyebrow}
+          </p>
+          <h2 className="mt-[2px] font-display text-[18px] text-navy">
+            {ARCHITECT.name}
+          </h2>
+          <p className="mt-[2px] font-mono text-[11px] uppercase tracking-wide text-charcoal/70">
             {ARCHITECT.title}
           </p>
         </div>
       </div>
 
-      <p className="text-[15px] text-charcoal">{ARCHITECT.bio}</p>
+      <p className="text-[14px] text-charcoal">{ARCHITECT.bio}</p>
 
       <a
         href={ARCHITECT.instagramUrl}
