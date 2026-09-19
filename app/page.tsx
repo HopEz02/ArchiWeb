@@ -45,10 +45,10 @@ const SERVICES: Service[] = [
   },
 ];
 
-// Same Unsplash-licensed interior photo used for the "Design" showcase
-// above, reused here purely as a placeholder for the hero's decorative
-// fading photo (layout weight only). Swap for real project photography
-// before launch — see FEATURED_PROJECTS note above re: licensing.
+// Same Unsplash-licensed photo used for the "Design" showcase above,
+// reused here purely as a placeholder for the hero's decorative fading
+// photo (layout weight only). Swap for real project photography before
+// launch — see FEATURED_PROJECTS note above re: licensing.
 const HERO_FADE_IMAGE =
   "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1600&auto=format&fit=crop";
 
@@ -82,22 +82,31 @@ export default function HomePage() {
         </div>
 
         {/* Capped at max-w-content (1200px) and centered so the hero row
-            reads as one composed unit even on very wide screens, instead
-            of the text and the architect card drifting apart with a dead
-            gap between them. relative z-10 keeps it above the fading
-            photo layer. */}
-        <div className="relative z-10 mx-auto max-w-content grid grid-cols-1 gap-3xl lg:grid-cols-2 lg:items-center lg:gap-4xl">
-          <div>
-            <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
-              Spații definite de lumină, proporție și scop.
-            </h1>
-            <p className="mt-lg max-w-prose text-[18px] text-charcoal">
-              Servicii complete de arhitectură: de la concept la execuție.
-            </p>
-            {/* The two Buttons sit directly against each other (no gap)
-                with radius only on their outer edge, so they read as one
-                combined block rather than two separate buttons. */}
-            <div className="mt-xl inline-flex flex-wrap">
+            reads as one composed unit even on very wide screens. relative
+            z-10 keeps it above the fading photo layer. */}
+        <div className="relative z-10 mx-auto max-w-content">
+          <div className="grid grid-cols-1 gap-3xl lg:grid-cols-2 lg:items-center lg:gap-4xl">
+            <div>
+              <h1 id="hero-heading" className="max-w-prose text-[40px] md:text-[64px]">
+                Spații definite de lumină, proporție și scop.
+              </h1>
+              <p className="mt-lg max-w-prose text-[18px] text-charcoal">
+                Servicii complete de arhitectură: de la concept la execuție.
+              </p>
+            </div>
+
+            <ArchitectProfile />
+          </div>
+
+          {/* Buttons live in their own row below both columns (heading
+              and architect card), horizontally centered across the full
+              hero width, rather than tucked under the heading — a
+              deliberate third row, not part of either column. The two
+              Buttons sit directly against each other (no gap) with
+              radius only on their outer edge, so they read as one
+              combined block rather than two separate buttons. */}
+          <div className="mt-2xl flex justify-center lg:mt-3xl">
+            <div className="inline-flex flex-wrap">
               <Button href="/contact#booking" variant="primary" radius="left">
                 Book a consultation
               </Button>
@@ -106,8 +115,6 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
-
-          <ArchitectProfile />
         </div>
       </section>
 
