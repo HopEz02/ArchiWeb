@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { ContactInfo } from "@/components/ContactInfo";
 import { CalBooking } from "@/components/CalBooking";
 
 export const metadata: Metadata = {
@@ -20,8 +21,20 @@ export default function ContactPage() {
           TODO: one line on what happens after you submit (e.g. expected
           response time).
         </p>
-        <div className="mt-2xl">
-          <ContactForm />
+
+        <div className="mt-3xl grid overflow-hidden border border-charcoal/15 md:grid-cols-2">
+          <ContactInfo />
+
+          <div className="relative border-t border-charcoal/15 bg-cream p-xl md:border-l md:border-t-0 md:p-3xl">
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-[2px] bg-gold"
+            />
+            <h2 className="text-[24px]">Send a message</h2>
+            <div className="mt-xl">
+              <ContactForm />
+            </div>
+          </div>
         </div>
       </section>
 
