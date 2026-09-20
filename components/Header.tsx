@@ -2,15 +2,13 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/services", label: "Services" },
-  { href: "/studio", label: "Studio" },
   { href: "/contact", label: "Contact" },
 ];
 
 /**
  * Responsive without JS: on narrow screens the wordmark and nav simply
  * wrap onto two lines via flex-wrap, rather than collapsing behind a
- * hamburger menu. With only four links this stays scannable and avoids
+ * hamburger menu. With only two links this stays scannable and avoids
  * hiding navigation behind an extra interaction.
  */
 export function Header() {
