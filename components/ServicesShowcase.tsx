@@ -96,7 +96,13 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
 
   return (
     <div className="relative" style={{ height: `${wrapperHeightVh}vh` }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      {/* h-dvh (dynamic viewport height) instead of h-screen (100vh):
+          on mobile, the browser's address bar hides/shows as you scroll,
+          which changes the real visible viewport height mid-interaction.
+          Plain 100vh doesn't track that, so this pinned section could
+          jump or leave a gap at the bottom while scrolling through it on
+          a phone. dvh tracks the actual visible viewport at all times. */}
+      <div className="sticky top-0 h-dvh w-full overflow-hidden">
         {/* Background photos + overlay. Purely decorative — the title
             text already conveys the information — so this layer is
             hidden from assistive tech. */}
