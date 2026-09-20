@@ -85,6 +85,19 @@ export default function HomePage() {
           className="absolute inset-0 -z-10 bg-gradient-to-b from-cream via-cream/95 to-cream/80 lg:bg-gradient-to-r lg:from-cream lg:via-cream/85 lg:to-cream/10"
         />
 
+        {/* Bottom fade: separate from the scrim above, this one only
+            covers a band at the very base of the section and always goes
+            fully opaque cream by the bottom edge — otherwise the photo
+            (still ~20% visible under the scrim right up to the edge) cuts
+            off abruptly where the hero meets "Selected work" below,
+            reading as a hard, unintentional-looking line. Sits above the
+            scrim (-z-[5] vs -z-10) so it can push all the way to solid
+            regardless of the scrim's own opacity at that point. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 -z-[5] h-20 bg-gradient-to-b from-transparent to-cream sm:h-28 md:h-36"
+        />
+
         <div className="relative mx-auto max-w-content">
           <div className="flex items-center gap-md">
             <div className="h-px w-10 bg-gold" aria-hidden="true" />
