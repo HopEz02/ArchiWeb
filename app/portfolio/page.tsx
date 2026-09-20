@@ -51,13 +51,16 @@ export default function PortfolioPage() {
 
       {/*
         Asymmetric editorial grid, inspired by the reference screenshots:
-        two columns on desktop, alternating items offset downward, one
-        "featured" project per few items spanning both columns. DOM order
-        stays a plain top-to-bottom list — the staggering is purely visual
+        two columns at every breakpoint (including mobile, per Denis's
+        request — the single-column mobile layout read too much like an
+        Instagram feed rather than the editorial gallery it is on
+        desktop), alternating items offset downward, one "featured"
+        project per few items spanning both columns. DOM order stays a
+        plain top-to-bottom list — the staggering is purely visual
         (margin-top), so keyboard/screen-reader order matches this simple
         reading order regardless of where things land on screen.
       */}
-      <div className="grid grid-cols-1 gap-3xl md:grid-cols-2 md:gap-5xl">
+      <div className="grid grid-cols-2 gap-lg sm:gap-2xl md:gap-5xl">
         {PLACEHOLDER_PROJECTS.map((project, index) => {
           const isFeatured = project.size === "large";
           const isStaggered = !isFeatured && index % 2 === 1;
@@ -66,7 +69,7 @@ export default function PortfolioPage() {
           return (
             <figure
               key={project.id}
-              className={[isFeatured ? "md:col-span-2" : "", isStaggered ? "md:mt-5xl" : ""]
+              className={[isFeatured ? "col-span-2" : "", isStaggered ? "mt-xl sm:mt-2xl md:mt-5xl" : ""]
                 .filter(Boolean)
                 .join(" ")}
             >
