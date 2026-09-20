@@ -45,13 +45,17 @@ const SERVICES: Service[] = [
   },
 ];
 
-// Same Unsplash-licensed photo used for the "Design" showcase above,
-// reused here as the hero's full-bleed background (layout/mood weight
-// only). TODO(content): swap for ArchiVerse's own real project
-// photography before launch — see FEATURED_PROJECTS note above re:
-// licensing of placeholder imagery in this file.
+// Hero full-bleed background photo. Unsplash License (free for
+// commercial use, no attribution required), credit: Thomas Bennie
+// (unsplash.com) — a bright, warm-toned minimal desk/plant/window scene
+// with no people or dark clothing, chosen specifically because it stays
+// light across its full frame at wide, short crop ratios (unlike the
+// "Design" service photo above, which has a dark area that only shows up
+// at this section's aspect ratio). TODO(content): swap for ArchiVerse's
+// own real project photography before launch — see FEATURED_PROJECTS
+// note above re: licensing of placeholder imagery in this file.
 const HERO_BACKGROUND_IMAGE =
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2400&auto=format&fit=crop";
+  "https://images.unsplash.com/photo-1679153369902-50687ca31379?q=80&w=2400&auto=format&fit=crop";
 
 export default function HomePage() {
   return (
