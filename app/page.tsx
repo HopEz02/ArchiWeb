@@ -186,6 +186,8 @@ export default function HomePage() {
         <Button
           href="/portfolio"
           variant="secondary"
+          radius="pill"
+          showArrow
           className="mt-2xl"
         >
           View full portfolio
